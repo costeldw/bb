@@ -1,0 +1,9 @@
+{
+  "name": "bb",
+  "version": "0.1",
+  "description": "Bulletin Board Web App",
+  "main": "index.js",
+  "repository": "git@github.com:costeldw/bb.git",
+  "author": "Drew Costello <costeldw@mcmaster.ca>",
+  "license": "MIT"
+}
