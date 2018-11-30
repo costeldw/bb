@@ -57,6 +57,34 @@ router.post('/notes', (req, res) => {
   });
 });
 
+router.put('/notes/:noteId', (req, res) => {
+  const { noteId } = req.params;
+  if (!noteId) {
+    return res.json({ success: false, error: 'No note id provided' });
+  }
+  Note.findById(noteId, (error, note) => {
+    if (error) return res.json({ success: false, error });
+    const { author, text } = req.body;
+    if (author) note.author = author;
+    if (text) note.text = text;
+    note.save(error => {
+      if (error) return res.json({ success: false, error });
+      return res.json({ success: true });
+    });
+  });
+});
+
+router.delete('/notes/:noteId', (req, res) => {
+  const { noteId } = req.params;
+  if (!noteId) {
+    return res.json({ success: false, error: 'No note id provided' });
+  }
+  Note.remove({ _id: noteId }, (error, note) => {
+    if (error) return res.json({ success: false, error });
+    return res.json({ success: true });
+  });
+});
+
 // Use our router configuration when we call /api
 app.use('/api', router);
 

@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
+import moment from 'moment';
 
 const Note = props => (
   <div className="singleNote">
@@ -12,6 +13,9 @@ const Note = props => (
         <ReactMarkdown source={props.children} />
       </div>
       <div className="singleNoteButtons">
+        <span className="time">{moment(props.timestamp).fromNow()}</span>
+        <a onClick={() => { props.handleUpdateNote(props.id); }}>update</a>
+        <a onClick={() => { props.handleDeleteNote(props.id); }}>delete</a>
       </div>
     </div>
   </div>
@@ -20,6 +24,9 @@ const Note = props => (
 Note.propTypes = {
   author: PropTypes.string.isRequired,
   children: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  handleUpdateNote: PropTypes.func.isRequired,
+  handleDeleteNote: PropTypes.func.isRequired,
   timestamp: PropTypes.string.isRequired,
 };
 
